@@ -66,3 +66,5 @@ header{position:relative;grid-template-columns:1fr auto 1fr}.brand-logo{grid-col
 
 /* Slightly larger wedding-dress covers and gallery photographs. */
 .dress-folders{max-width:1120px}.asa-photos{max-width:950px}.asa-photos img{height:425px}@media(max-width:900px){.dress-folders{max-width:720px}}@media(max-width:800px){.asa-photos img{height:370px}}@media(max-width:540px){.dress-folders{max-width:330px}.asa-photos{max-width:330px}.asa-photos img{height:355px}}
+
+.dress-heading .gown-description{max-width:730px;margin:22px auto 0;text-align:left;font-size:14px;line-height:1.85;color:#555}@media(max-width:650px){.dress-heading .gown-description{font-size:13px;line-height:1.8}}
