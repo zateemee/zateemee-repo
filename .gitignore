@@ -2,3 +2,8 @@ dist/
 node_modules/
 .env
 .sites-runtime/
+
+data/
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm

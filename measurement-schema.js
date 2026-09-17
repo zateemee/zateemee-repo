@@ -1,0 +1,8 @@
+const SCHEMA=[
+ {title:'Bodice · Bust · Sleeve', items:[[1,'Front body length'],[2,'Shoulder to bust point'],[3,'Shoulder to under bust'],[4,'Bust point to under bust'],[5,'Bust circumference'],[6,'Bust front'],[7,'Bust to bust point'],[8,'Under bust circumference'],[9,'Under bust front'],[10,'Bust radius'],[11,'Upper chest round / depth clip'],[12,'Clip'],[13,'Neck depth'],[14,'Blouse length'],[15,'Neck circumference'],[16,'Front cross shoulder (upper)'],[17,'Front cross shoulder (lower)'],[18,'Armhole circumference'],[19,'Armhole to waist'],[20,'Diff. waist & belle length'],[21,'Belle circumference'],[22,'Belle front'],[23,'Waist circumference'],[24,'Waist front'],[25,'Under bust to waist'],[26,'Waist to centre front'],[27,'Back body length'],[28,'Nape to waist'],[29,'Back cross armhole'],[30,'Back shoulder to waist'],[31,'Shoulder length'],[32,'Bicep'],[33,'Elbow length / round'],[34,'¾ sleeve length / round'],[35,'Full sleeve length / round'],[36,'Wrist'],[37,'Shoulder straps to waist (dist.)'],[38,'Shoulder straps to waist (height)'],[39,'Back cross shoulder']]},
+ {title:'Skirt', items:[[40,'Hips circumference front / back'],[41,'Skirt length / knee'],[42,'Waist to ankle'],[43,'Waist to heel']]},
+ {title:'Trouser', items:[[44,'Waist to hip'],[45,'Body rise'],[46,'Trouser length'],[47,'Trouser bottom'],[48,'Ankle round'],[49,'Inseam'],[50,'Knee round'],[51,'Thigh'],[52,'Crotch']]},
+ {title:'Additional Fit Points', items:[[53,'Neck to bust'],[54,'Nipple to side bust'],[55,'Waist to under bum'],[56,'Nipple to cup'],[57,'Corset length'],[58,'Waist to floor'],[59,'Hollow to waist'],[60,'Off shoulder round'],[61,'Bra strap to bra strap'],[62,'Under bum round'],[63,'Walking knee'],[64,'Skin net code']]}
+];
+
+export default SCHEMA;
