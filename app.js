@@ -48,9 +48,9 @@ document.addEventListener('click',e=>{dropdowns.forEach(d=>{if(!d.contains(e.tar
 document.addEventListener('keydown',e=>{if(e.key==='Escape')dropdowns.forEach(d=>{if(d.open){d.open=false;d.querySelector('summary').focus()}})});
 document.querySelectorAll('.dropdown-panel a').forEach(a=>a.addEventListener('click',()=>dropdowns.forEach(d=>d.open=false)));
 const enquiryType=new URLSearchParams(location.search).get('interest');
-const enquiryTypes={couture:'Couture Experience',wholesale:'Wholesale',ambassador:'Xatini Ambassador Program'};
+const enquiryTypes={couture:'Couture Experience',wholesale:'Wholesale',ambassador:'Zateemee Ambassador Program'};
 if(location.pathname.endsWith('contact.html')&&enquiryTypes[enquiryType]){
  const interest=enquiryTypes[enquiryType];document.querySelector('[name=interest]').value=interest;
- document.querySelector('#contact h2').innerHTML=enquiryType==='couture'?'Your <em>Couture Experience.</em>':enquiryType==='wholesale'?'Wholesale <em>enquiries.</em>':'Xatini <em>Ambassador Program.</em>';
- document.querySelector('#contact>div>p:not(.eyebrow)').textContent=enquiryType==='couture'?'Tell the atelier about your vision, occasion and preferred silhouette.':enquiryType==='wholesale'?'Share your boutique details and your interest in stocking the Zateemee collection.':'Share your interest in the Xatini Ambassador Program and tell us about yourself.';
+ document.querySelector('#contact h2').innerHTML=enquiryType==='couture'?'Your <em>Couture Experience.</em>':enquiryType==='wholesale'?'Wholesale <em>enquiries.</em>':'Zateemee <em>Ambassador Program.</em>';
+ document.querySelector('#contact>div>p:not(.eyebrow)').textContent=enquiryType==='couture'?'Tell the atelier about your vision, occasion and preferred silhouette.':enquiryType==='wholesale'?'Share your boutique details and your interest in stocking the Zateemee collection.':'Share your interest in the Zateemee Ambassador Program and tell us about yourself.';
 }
