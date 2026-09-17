@@ -71,3 +71,5 @@ document.querySelector('#site-search').addEventListener('input',e=>{const q=e.ta
 const requestedGown=new URLSearchParams(location.search).get('gown');if(gowns.some(g=>g.name===requestedGown))showGown(requestedGown);
 document.querySelector('#bag-enquire').addEventListener('click',()=>{sessionStorage.setItem('zateemee-bag-enquiry',gowns.filter(g=>bag.includes(g.name)).map(g=>g.name).join(', '))});
 if(location.pathname.endsWith('contact.html')){const selection=sessionStorage.getItem('zateemee-bag-enquiry');if(selection){document.querySelector('[name=message]').value=`I would like to enquire about: ${selection}.\nOccasion date: `;sessionStorage.removeItem('zateemee-bag-enquiry')}}
+
+const requestedTool=new URLSearchParams(location.search).get('tool');if(requestedTool==='cart'){renderBag();document.querySelector('#cart-dialog').showModal()}else if(requestedTool==='search')document.querySelector('#search-dialog').showModal();
