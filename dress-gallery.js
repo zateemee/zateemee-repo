@@ -10,3 +10,5 @@ const dialog=document.querySelector('#dress-photo');
 
 
 document.addEventListener('keydown',e=>{if(e.key==='Escape')dropdowns.forEach(d=>d.open=false)});
+document.addEventListener('click',e=>{const link=e.target.closest('a[href*="occasion-dress.html"]');if(!link||e.defaultPrevented||e.button!==0||e.ctrlKey||e.metaKey||e.shiftKey||e.altKey||matchMedia('(prefers-reduced-motion: reduce)').matches)return;e.preventDefault();document.querySelector('main')?.classList.add('occasion-leaving');setTimeout(()=>location.assign(link.href),400)});
+window.addEventListener('pageshow',()=>document.querySelector('main')?.classList.remove('occasion-leaving'));

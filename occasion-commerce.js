@@ -5,10 +5,11 @@
  const photos=document.querySelector('#occasion-product-photos');
  if(photos){
   const id=new URLSearchParams(location.search).get('dress');const product=products.find(p=>p.id===id);
-  if(!product){document.querySelector('#occasion-product-name').textContent='Dress not found';document.querySelector('#occasion-add').disabled=true;return}
+  if(!product){document.querySelector('#occasion-product-name').textContent='Dress not found';document.querySelector('#occasion-add').disabled=true;document.querySelector('.occasion-product-page').classList.add('occasion-ready');return}
   document.querySelector('#occasion-product-name').textContent=product.name;
   if(product.id.startsWith('red-')){const other=products.find(p=>p.id.startsWith('red-')&&p.id!==product.id);const link=document.createElement('a');link.className='home-link';link.href='occasion-dress.html?dress='+other.id;link.textContent='Also pictured: '+other.name;document.querySelector('.occasion-product-copy').append(link)}
   product.photos.forEach((photo,index)=>{const button=document.createElement('button');button.type='button';button.dataset.photo='assets/special-occasions-gallery/'+photo+'.webp';button.setAttribute('aria-label','Expand dress photograph '+(index+1));const img=document.createElement('img');img.src=button.dataset.photo;img.alt=product.name+' — photograph '+(index+1);button.append(img);photos.append(button)});
+  const firstImage=photos.querySelector('img'); const reveal=()=>document.querySelector('.occasion-product-page').classList.add('occasion-ready'); firstImage.decode().catch(()=>{}).then(reveal);
   document.querySelector('#occasion-add').addEventListener('click',()=>{try{const bag=read();if(!bag.includes(product.name))bag.push(product.name);write(bag);document.querySelector('#occasion-add-status').textContent='Added to your cart.'}catch{document.querySelector('#occasion-add-status').textContent='Your browser could not save the cart. Please enable browser storage and try again.'}});
  }
  const items=document.querySelector('#checkout-items');
