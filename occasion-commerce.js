@@ -14,7 +14,7 @@
  }
  const items=document.querySelector('#checkout-items');
  if(items){
-  const bridal=['Asa','Simi','Esther','Anita','Janice','Selena','Candace'].map(name=>({name,image:name.toLowerCase()}));const catalog=[...bridal,...products];
+  const catalog=products;
   function render(){items.replaceChildren();const selected=catalog.filter(p=>read().includes(p.name));document.querySelector('#checkout-summary').hidden=!selected.length;if(!selected.length){items.textContent='Your cart is empty.';return}
    selected.forEach(product=>{const row=document.createElement('div');row.className='checkout-item';const img=document.createElement('img');img.src='assets/'+product.image+'.webp';img.alt=product.name;const text=document.createElement('div');const name=document.createElement('h2');name.textContent=product.name;const price=document.createElement('p');price.textContent='Price to be confirmed';text.append(name,price);const remove=document.createElement('button');remove.type='button';remove.textContent='Remove';remove.setAttribute('aria-label','Remove '+product.name);remove.addEventListener('click',()=>{write(read().filter(n=>n!==product.name));render()});row.append(img,text,remove);items.append(row)});
   }
