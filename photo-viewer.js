@@ -5,12 +5,13 @@
  const close=viewer.querySelector('.close');
  viewer.classList.add('photo-viewer');
  let photos=[],position=0,trigger,changing=false,closing=false;
+ const thumbs=document.createElement('div');thumbs.className='photo-thumbnails';thumbs.setAttribute('aria-label','Choose a photograph');viewer.append(thumbs);
  const reduced=matchMedia("(prefers-reduced-motion: reduce)");
  const previous=document.createElement('button'),next=document.createElement('button');
  for(const [button,label,glyph,cls] of [[previous,'Previous photograph','‹','photo-previous'],[next,'Next photograph','›','photo-next']]){
   button.type='button';button.className='photo-control '+cls;button.setAttribute('aria-label',label);button.textContent=glyph;viewer.append(button);
  }
- function display(index){position=(index+photos.length)%photos.length;const item=photos[position];image.src=item.dataset.photo||item.dataset.image;image.alt=item.querySelector('img')?.alt||'Zateemee photograph';}
+ function display(index){position=(index+photos.length)%photos.length;const item=photos[position];image.src=item.dataset.photo||item.dataset.image;image.alt=item.querySelector('img')?.alt||'Zateemee photograph';[...thumbs.children].forEach((button,i)=>button.setAttribute('aria-pressed',String(i===position)));}
  async function change(direction){
   if(changing||closing||photos.length<2)return;
   changing=true;
@@ -35,6 +36,7 @@
  const targets=[...document.querySelectorAll('[data-photo],[data-image]')];
  targets.forEach(item=>item.addEventListener('click',()=>{
   photos=targets.filter(p=>p.getClientRects().length&&!p.closest('[hidden]'));
+  thumbs.replaceChildren();photos.forEach((photo,i)=>{const button=document.createElement('button');button.type='button';button.setAttribute('aria-label','Show photograph '+(i+1));const thumbnail=document.createElement('img');thumbnail.src=photo.dataset.photo||photo.dataset.image;thumbnail.alt='';button.append(thumbnail);button.addEventListener('click',()=>{if(i!==position)change(i-position)});thumbs.append(button)});
   closing=false;changing=false;viewer.getAnimations().forEach(a=>a.cancel());image.getAnimations().forEach(a=>a.cancel());trigger=item;display(photos.indexOf(item));previous.hidden=next.hidden=photos.length<2;viewer.showModal();viewer.animate([{opacity:0,transform:"scale(.98)"},{opacity:1,transform:"scale(1)"}],{duration:reduced.matches?0:240,easing:"ease-out"});close.focus();
  }));
  previous.addEventListener('click',()=>change(-1));next.addEventListener('click',()=>change(1));

@@ -1,0 +1,12 @@
+(() => {
+ const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+ const pictures=document.querySelectorAll('.house-story .story-photo,.designer-rack-photo,.asa-photos button,.forever-photo-grid button,.occasion-photo,.home-editorials .story-photo');
+ if(!reduced.matches){const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('photo-arrived');observer.unobserve(entry.target)}}),{threshold:.08});pictures.forEach(photo=>{photo.classList.add('photo-reveal');observer.observe(photo)});reduced.addEventListener('change',()=>{if(reduced.matches){observer.disconnect();pictures.forEach(photo=>photo.classList.add('photo-arrived'))}})}
+ const nav=document.querySelector('#navigation'),menu=document.querySelector('.menu-toggle');if(!nav||!menu)return;
+ const logo=document.createElement('a');logo.className='mobile-menu-brand';logo.href='index.html';logo.setAttribute('aria-label','Zateemee home');logo.innerHTML='<img src="assets/zateemee-logo.png" alt="Zateemee Bride" width="200" height="87">';nav.prepend(logo);
+ const media=matchMedia('(max-width: 760px)');function sync(){document.body.classList.toggle('mobile-menu-open',media.matches&&menu.getAttribute('aria-expanded')==='true')}
+ new MutationObserver(sync).observe(menu,{attributes:true,attributeFilter:['aria-expanded']});media.addEventListener('change',sync);
+ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&media.matches&&menu.getAttribute('aria-expanded')==='true'){menu.setAttribute('aria-expanded','false');nav.classList.remove('open');menu.focus()}});
+ nav.addEventListener('click',e=>{if(e.target.closest('a')&&media.matches){menu.setAttribute('aria-expanded','false');nav.classList.remove('open')}});
+ const collections=[...nav.querySelectorAll('.nav-dropdown')].find(dropdown=>dropdown.querySelector('summary')?.textContent.trim()==='Collections');if(collections){const panel=collections.querySelector('.dropdown-panel');const line=document.createElement('span');line.className='collection-nav-line';panel.append(line);function position(link){line.style.top=link.offsetTop+link.offsetHeight-5+'px';line.style.width=Math.max(0,link.offsetWidth-40)+'px';line.style.opacity='1'};panel.querySelectorAll('a').forEach(link=>{link.addEventListener('pointerenter',()=>position(link));link.addEventListener('focus',()=>position(link))});panel.addEventListener('pointerleave',()=>line.style.opacity='0')}
+})();
