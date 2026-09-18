@@ -1,0 +1,158 @@
+[
+  {
+    "id": "asa",
+    "name": "Asa",
+    "description": "Off-the-shoulder draped satin gown featuring a sculpted sweetheart neckline and softly structured bodice. Soft ruching defines the waist, accentuated with a delicate crystal and pearl embellishment flowing into a sleek fit-and-flare skirt with an elongated train. The silhouette is refined and modern, balancing clean minimalism with subtle couture detail. Button down detail at the back.",
+    "photos": [
+      "assets/asa-gallery/asa-01.webp",
+      "assets/asa-gallery/asa-02.webp",
+      "assets/asa-gallery/asa-03.webp",
+      "assets/asa-gallery/asa-04.webp"
+    ],
+    "image": "assets/asa-gallery/asa-01.webp",
+    "url": "asa.html",
+    "type": "bridal",
+    "srcset": "assets/responsive/asa-320.webp 320w, assets/responsive/asa-640.webp 640w, assets/responsive/asa-960.webp 960w",
+    "imageWidth": 1867,
+    "imageHeight": 2800
+  },
+  {
+    "id": "selena",
+    "name": "Selena",
+    "description": "Off-the-shoulder draped satin ballgown featuring a sculpted sweetheart neckline and softly structured bodice. Precision pleating defines the waist before transitioning into a subtle basque detail that enhances the silhouette. The voluminous skirt falls into fluid, luminous folds with discreet pockets and an extended train, embodying modern royalty with refined couture simplicity.",
+    "photos": [
+      "assets/selena-gallery/selena-01.webp",
+      "assets/selena-gallery/selena-02.webp",
+      "assets/selena-gallery/selena-03.webp",
+      "assets/selena-gallery/selena-04.webp",
+      "assets/selena-gallery/selena-05.webp",
+      "assets/selena-gallery/selena-06.webp"
+    ],
+    "image": "assets/selena-gallery/selena-01.webp",
+    "url": "selena.html",
+    "type": "bridal",
+    "srcset": "assets/responsive/selena-320.webp 320w, assets/responsive/selena-640.webp 640w, assets/responsive/selena-960.webp 960w",
+    "imageWidth": 1867,
+    "imageHeight": 2800
+  },
+  {
+    "id": "janice",
+    "name": "Janice",
+    "description": "Illusion high-neck mermaid gown featuring intricate lace appliqu\u00e9 over sculpted corsetry with a plunging sweetheart underlay. The fitted silhouette contours the body before flaring into a delicate lace train with scalloped edging. Sheer lace sleeves and an illusion back finished with covered buttons add refined structure, while a dramatic detachable satin bow and extended train create a statement of timeless couture romance.",
+    "photos": [
+      "assets/janice-gallery/janice-01.webp",
+      "assets/janice-gallery/janice-02.webp",
+      "assets/janice-gallery/janice-03.webp",
+      "assets/janice-gallery/janice-04.webp",
+      "assets/janice-gallery/janice-05.webp"
+    ],
+    "image": "assets/janice-gallery/janice-01.webp",
+    "url": "janice.html",
+    "type": "bridal",
+    "srcset": "assets/responsive/janice-320.webp 320w, assets/responsive/janice-640.webp 640w, assets/responsive/janice-960.webp 960w",
+    "imageWidth": 1867,
+    "imageHeight": 2800
+  },
+  {
+    "id": "candace",
+    "name": "Candace",
+    "description": "High-neck halter gown fully hand-embellished with intricate crystal and sequin detailing throughout. The sculpted bodice contours seamlessly into a sleek column silhouette, elongating the frame with refined precision. It also has a detachable flowing train . A coordinating embellished cathedral-length veil adds soft drama and cohesive brilliance, creating a statement of modern couture elegance.",
+    "photos": [
+      "assets/candace-gallery/candace-01.webp",
+      "assets/candace-gallery/candace-02.webp",
+      "assets/candace-gallery/candace-03.webp",
+      "assets/candace-gallery/candace-04.webp"
+    ],
+    "image": "assets/candace-gallery/candace-01.webp",
+    "url": "candace.html",
+    "type": "bridal",
+    "srcset": "assets/responsive/candace-320.webp 320w, assets/responsive/candace-640.webp 640w, assets/responsive/candace-960.webp 960w",
+    "imageWidth": 1867,
+    "imageHeight": 2800
+  },
+  {
+    "id": "anita",
+    "name": "Anita",
+    "description": "heart shape Illusion high-neck ballgown featuring intricate lace appliqu\u00e9 with delicate hand embellishment throughout the bodice and long sheer sleeves. The sculpted corsetry defines the waist before flowing into a soft, voluminous tulle skirt layered with subtle shimmer and embroidered motifs. A cathedral-length veil completes the silhouette, embodying timeless romance with refined couture detail.",
+    "photos": [
+      "assets/anita-gallery/anita-01.webp",
+      "assets/anita-gallery/anita-02.webp",
+      "assets/anita-gallery/anita-03.webp"
+    ],
+    "image": "assets/anita-gallery/anita-01.webp",
+    "url": "anita.html",
+    "type": "bridal",
+    "srcset": "assets/responsive/anita-320.webp 320w, assets/responsive/anita-640.webp 640w, assets/responsive/anita-960.webp 960w",
+    "imageWidth": 2200,
+    "imageHeight": 2750
+  },
+  {
+    "id": "simi",
+    "name": "Simi",
+    "description": "Corseted ballgown featuring a sculpted sweetheart neckline with a defined basque waist. The structured bodice is adorned with delicate appliqu\u00e9 and hand embellishment, complemented by embellished neck piece and shoulder straps that drape elegantly along the arms. The full skirt unfolds into a voluminous silhouette creating a timeless statement of regal romance and refined couture elegance.",
+    "photos": [
+      "assets/simi-gallery/simi-01.webp",
+      "assets/simi-gallery/simi-02.webp",
+      "assets/simi-gallery/simi-03.webp",
+      "assets/simi-gallery/simi-04.webp"
+    ],
+    "image": "assets/simi-gallery/simi-01.webp",
+    "url": "simi.html",
+    "type": "bridal",
+    "srcset": "assets/responsive/simi-320.webp 320w, assets/responsive/simi-640.webp 640w, assets/responsive/simi-960.webp 960w",
+    "imageWidth": 1867,
+    "imageHeight": 2800
+  },
+  {
+    "id": "esther",
+    "name": "Esther",
+    "description": "Off-the-shoulder mermaid gown featuring an intricately embellished lace bodice with sculpted sweetheart neckline and hand placed lace long sleeves. Dimensional lace appliqu\u00e9 cascades organically over the corseted waist into a sleek satin skirt, contouring the silhouette before flowing into a refined train. A dramatic detachable drop waist satin overskirt and statement drape and hand made flowers accent at the hip add regal volume and couture versatility, blending romance with modern structure.",
+    "photos": [
+      "assets/esther-gallery/esther-01-refined.webp",
+      "assets/esther-gallery/esther-02-refined.webp",
+      "assets/esther-gallery/esther-03-refined.webp"
+    ],
+    "image": "assets/esther-gallery/esther-01-refined.webp",
+    "url": "esther.html",
+    "type": "bridal",
+    "srcset": "assets/responsive/esther-320.webp 320w, assets/responsive/esther-640.webp 640w, assets/responsive/esther-960.webp 960w",
+    "imageWidth": 1024,
+    "imageHeight": 1536
+  },
+  {
+    "id": "champagne-dress",
+    "name": "Sheba Short Lace Dress",
+    "price": 1250,
+    "displayPrice": "$1,250",
+    "description": "An elegant luxury lace mini dress, beautifully crafted for sophisticated occasions and special events.",
+    "image": "assets/special-occasions-gallery/occasion-01-refined.webp",
+    "photos": [
+      "assets/special-occasions-gallery/occasion-01-refined.webp",
+      "assets/special-occasions-gallery/occasion-02.webp"
+    ],
+    "url": "occasion-dress.html?dress=champagne-dress",
+    "type": "occasion",
+    "srcset": "assets/responsive/champagne-dress-320.webp 320w, assets/responsive/champagne-dress-640.webp 640w, assets/responsive/champagne-dress-960.webp 960w",
+    "imageWidth": 1121,
+    "imageHeight": 1403
+  },
+  {
+    "id": "red-evening-gown",
+    "name": "Jojo Red Mermaid Gown",
+    "price": 2850,
+    "displayPrice": "$2,850",
+    "description": "A striking hand-beaded mermaid gown featuring an elegant sculpted silhouette and a dramatic sweeping train.",
+    "image": "assets/special-occasions-gallery/occasion-03-refined.webp",
+    "photos": [
+      "assets/special-occasions-gallery/occasion-03-refined.webp",
+      "assets/special-occasions-gallery/occasion-04-refined.webp",
+      "assets/special-occasions-gallery/occasion-05-refined.webp",
+      "assets/special-occasions-gallery/occasion-06-refined.webp"
+    ],
+    "url": "occasion-dress.html?dress=red-evening-gown",
+    "type": "occasion",
+    "srcset": "assets/responsive/red-evening-gown-320.webp 320w, assets/responsive/red-evening-gown-640.webp 640w, assets/responsive/red-evening-gown-960.webp 960w",
+    "imageWidth": 1121,
+    "imageHeight": 1403
+  }
+]

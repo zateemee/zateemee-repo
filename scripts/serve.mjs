@@ -1,3 +1,5 @@
+import {paymentApi} from './payment-api.mjs';
+import {atelierApi} from './atelier-api.mjs';
 import {communityApi} from './community-api.mjs';
 import {clientApi} from './client-api.mjs';
 import http from 'node:http';
@@ -5,4 +7,4 @@ import {readFile,stat} from 'node:fs/promises';
 import path from 'node:path';
 const root=path.resolve(process.argv[2]||'.');
 const mime={'.html':'text/html','.css':'text/css','.js':'text/javascript','.json':'application/json','.webp':'image/webp','.svg':'image/svg+xml','.mp4':'video/mp4'};
-http.createServer(async(req,res)=>{try{if(await communityApi(req,res))return;if(await clientApi(req,res))return;const url=new URL(req.url,'http://localhost');const file=path.resolve(root,'.'+decodeURIComponent(url.pathname==='/'?'/index.html':url.pathname));if(!file.startsWith(root+path.sep)){res.writeHead(403).end();return}if(path.relative(root,file).split(path.sep).some(part=>part.startsWith('.'))||['data','scripts','.git','work'].some(part=>path.relative(root,file).split(path.sep).includes(part))){res.writeHead(403).end();return}const data=await readFile(file);res.writeHead(200,{'Content-Type':mime[path.extname(file)]||'application/octet-stream'});res.end(data)}catch{res.writeHead(404).end('Page not found')}}).listen(Number(process.env.PORT||4173),process.env.HOST||'127.0.0.1',()=>console.log('Zateemee preview: http://127.0.0.1:4173'));
+http.createServer(async(req,res)=>{try{if(await paymentApi(req,res))return;if(await atelierApi(req,res))return;if(await communityApi(req,res))return;if(await clientApi(req,res))return;const url=new URL(req.url,'http://localhost');const file=path.resolve(root,'.'+decodeURIComponent(url.pathname==='/'?'/index.html':url.pathname));if(!file.startsWith(root+path.sep)){res.writeHead(403).end();return}if(path.relative(root,file).split(path.sep).some(part=>part.startsWith('.'))||['data','scripts','.git','work'].some(part=>path.relative(root,file).split(path.sep).includes(part))){res.writeHead(403).end();return}const data=await readFile(file);res.writeHead(200,{'Content-Type':mime[path.extname(file)]||'application/octet-stream'});res.end(data)}catch{res.writeHead(404).end('Page not found')}}).listen(Number(process.env.PORT||4173),process.env.HOST||'127.0.0.1',()=>console.log('Zateemee preview: http://127.0.0.1:4173'));

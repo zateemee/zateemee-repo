@@ -1,0 +1,18 @@
+services:
+  web:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - "127.0.0.1:4173:4173"
+    volumes:
+      - atelier-data:/data
+  backups:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    command: ["node", "scripts/backup-runner.mjs"]
+    volumes:
+      - atelier-data:/data
+volumes:
+  atelier-data:
