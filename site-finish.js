@@ -39,7 +39,7 @@ window.bridalDescriptions={"asa": "Off-the-shoulder draped satin gown featuring 
  const reduced=matchMedia('(prefers-reduced-motion: reduce)');let visible=false,timer,frame;
  number.setAttribute('aria-label','11 plus');const visual=document.createElement('span');visual.className='country-count';visual.setAttribute('aria-hidden','true');visual.textContent='11+';number.replaceChildren(visual);
  function stop(){clearTimeout(timer);cancelAnimationFrame(frame);number.classList.remove('counting');visual.textContent='11+'}
- function run(){if(!visible||reduced.matches||document.hidden)return;const start=performance.now();number.classList.add('counting');function tick(now){const progress=Math.min(1,(now-start)/1150);visual.textContent=Math.min(11,1+Math.floor(progress*11))+'+';if(progress<1)frame=requestAnimationFrame(tick);else{number.classList.remove('counting');timer=setTimeout(run,6000)}}frame=requestAnimationFrame(tick)}
+ function run(){if(!visible||reduced.matches||document.hidden)return;const start=performance.now();number.classList.add('counting');function tick(now){const progress=Math.min(1,(now-start)/1000);visual.textContent=Math.min(11,1+Math.floor(progress*11))+'+';if(progress<1)frame=requestAnimationFrame(tick);else{number.classList.remove('counting');timer=setTimeout(run,6000)}}frame=requestAnimationFrame(tick)}
  new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;stop();if(visible)run()},{threshold:.25}).observe(strip);
  document.addEventListener('visibilitychange',()=>{stop();if(!document.hidden)run()});reduced.addEventListener('change',()=>{stop();run()});
 })();

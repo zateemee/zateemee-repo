@@ -136,3 +136,5 @@ body:not(.client-body){background-color:#fff;background-image:radial-gradient(el
 .house-story .recognition-summary strong.counting{animation:recognition-count-glow 1.15s ease-in-out}
 @keyframes recognition-count-glow{0%,100%{color:#171717;transform:translateY(0)}40%{color:#98783e;transform:translateY(-2px)}}
 @media(prefers-reduced-motion:reduce){.house-story .recognition-summary strong.counting{animation:none}}
+.house-story .recognition-summary{padding:18px 0}
+.house-story .recognition-summary strong.counting{animation-duration:1s}
