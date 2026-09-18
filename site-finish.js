@@ -32,3 +32,14 @@ window.bridalDescriptions={"asa": "Off-the-shoulder draped satin gown featuring 
  if(location.pathname.endsWith('contact.html')){const form=document.querySelector('#enquiry-form');if(form){const label=document.createElement('label');label.textContent='Preferred consultation date (optional)';const date=document.createElement('input');date.type='date';date.name='consultation_date';const today=new Date();date.min=today.getFullYear()+'-'+String(today.getMonth()+1).padStart(2,'0')+'-'+String(today.getDate()).padStart(2,'0');label.append(date);form.querySelector('[type=submit]').before(label);const note=document.createElement('p');note.className='consultation-note';note.textContent='Preferred dates are requests. The atelier will confirm availability.';label.after(note);form.addEventListener('submit',()=>{if(date.value){const message=form.querySelector('[name=message]');message.value=message.value.replace(/\nPreferred consultation date:.*$/,'')+'\nPreferred consultation date: '+date.value}},{capture:true})}}
  document.querySelectorAll('main img').forEach(img=>{img.decoding='async'});
 })();
+
+(()=>{
+ const strip=document.querySelector('.recognition-summary');if(!strip)return;
+ const number=Array.from(strip.querySelectorAll('.designer-facts strong')).find(node=>node.textContent.trim()==='11+');if(!number)return;
+ const reduced=matchMedia('(prefers-reduced-motion: reduce)');let visible=false,timer,frame;
+ number.setAttribute('aria-label','11 plus');const visual=document.createElement('span');visual.className='country-count';visual.setAttribute('aria-hidden','true');visual.textContent='11+';number.replaceChildren(visual);
+ function stop(){clearTimeout(timer);cancelAnimationFrame(frame);number.classList.remove('counting');visual.textContent='11+'}
+ function run(){if(!visible||reduced.matches||document.hidden)return;const start=performance.now();number.classList.add('counting');function tick(now){const progress=Math.min(1,(now-start)/1150);visual.textContent=Math.min(11,1+Math.floor(progress*11))+'+';if(progress<1)frame=requestAnimationFrame(tick);else{number.classList.remove('counting');timer=setTimeout(run,6000)}}frame=requestAnimationFrame(tick)}
+ new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;stop();if(visible)run()},{threshold:.25}).observe(strip);
+ document.addEventListener('visibilitychange',()=>{stop();if(!document.hidden)run()});reduced.addEventListener('change',()=>{stop();run()});
+})();
