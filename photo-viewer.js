@@ -18,17 +18,17 @@
   const preload=new Image();preload.src=photos[index].dataset.photo||photos[index].dataset.image;
   try{await preload.decode()}catch{changing=false;return}
   if(closing||!viewer.open){changing=false;return}
-  const duration=reduced.matches?0:160;
-  await image.animate([{opacity:1},{opacity:0}],{duration,fill:'forwards',easing:'ease-in'}).finished;
+  const duration=reduced.matches?0:280;
+  await image.animate([{opacity:1},{opacity:0}],{duration,fill:'forwards',easing:'ease-in-out'}).finished;
   if(closing||!viewer.open){changing=false;return}
   display(index);
-  await image.animate([{opacity:0},{opacity:1}],{duration:reduced.matches?0:220,fill:'forwards',easing:'ease-out'}).finished;
+  await image.animate([{opacity:0},{opacity:1}],{duration:reduced.matches?0:360,fill:'forwards',easing:'ease-in-out'}).finished;
   changing=false;
  }
  async function dismiss(){
   if(closing||!viewer.open)return;
   closing=true;viewer.classList.add('viewer-closing');
-  await viewer.animate([{opacity:1,transform:'scale(1)'},{opacity:0,transform:'scale(.98)'}],{duration:reduced.matches?0:220,easing:'ease-in',fill:'forwards'}).finished;
+  await viewer.animate([{opacity:1,transform:'scale(1)'},{opacity:0,transform:'scale(.98)'}],{duration:reduced.matches?0:360,easing:'ease-in-out',fill:'forwards'}).finished;
   viewer.close();viewer.classList.remove('viewer-closing');
  }
 
