@@ -142,3 +142,16 @@ body:not(.client-body){background-color:#fff;background-image:radial-gradient(el
 /* Soft champagne clouds at the outer edges; center remains clear. */
 body:not(.client-body)::after{content:"";position:fixed;inset:0;z-index:5;pointer-events:none;background:radial-gradient(ellipse 260px 310px at -65px 24%,rgba(210,183,126,.23) 0%,rgba(225,204,163,.12) 42%,transparent 78%),radial-gradient(ellipse 220px 380px at calc(100% + 55px) 65%,rgba(216,190,138,.22) 0%,rgba(231,213,178,.11) 45%,transparent 80%),radial-gradient(ellipse 190px 190px at 0 86%,rgba(226,204,163,.13),transparent 78%)}
 @media(max-width:760px){body:not(.client-body)::after{background:radial-gradient(ellipse 110px 270px at -40px 30%,rgba(217,190,137,.18),transparent 80%),radial-gradient(ellipse 100px 300px at calc(100% + 35px) 72%,rgba(225,200,155,.17),transparent 80%)}}
+
+/* Consistent, compact reading rhythm across both About Us stories. */
+.house-story .story-text-column,.designer-biography{text-align:left}
+.house-story .story-text-column p,.designer-biography>p:not(.eyebrow){margin:0 0 14px;line-height:1.75}
+.house-story .story-text-column>p:not(.story-kicker):first-of-type{font-size:14px;line-height:1.75}
+.house-story .story-text-column h1{margin:0 0 20px}
+.house-story .story-text-column .story-chapter{margin:26px 0 0;padding:0;border:0}
+.house-story .story-text-column .story-chapter h2{margin:0 0 14px}
+.house-story .story-text-column .story-chapter p:last-child,.designer-biography>p:last-child{margin-bottom:0}
+.designer-biography>.eyebrow{margin:0 0 14px}
+.designer-biography h2{margin:0 0 10px}
+.designer-biography .designer-role{margin-bottom:20px!important}
+.house-story .story-text-column>p:not(.story-kicker):first-of-type{font-size:15px}
