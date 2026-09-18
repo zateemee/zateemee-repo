@@ -75,4 +75,14 @@ if(location.pathname.endsWith('contact.html')){const selection=sessionStorage.ge
 
 const requestedTool=new URLSearchParams(location.search).get('tool');if(requestedTool==='cart'){renderBag();document.querySelector('#cart-dialog').showModal()}else if(requestedTool==='search')document.querySelector('#search-dialog').showModal();
 
-document.querySelector('.rack-pause')?.addEventListener('click',function(){const paused=this.getAttribute('aria-pressed')!=='true';this.setAttribute('aria-pressed',paused);this.textContent=paused?'Play gallery':'Pause gallery';document.querySelector('.home-photo-rack').classList.toggle('rack-paused',paused)});
+
+(() => {
+ const rack=document.querySelector('.home-photo-rack');if(!rack)return;
+ const track=rack.querySelector('.rack-track'),set=rack.querySelector('.rack-set'),pause=rack.querySelector('.rack-pause');
+ const reduced=matchMedia('(prefers-reduced-motion: reduce)');let index=0,timer,moving=false;
+ function stopped(){return reduced.matches||document.hidden||pause.getAttribute('aria-pressed')==='true'||rack.matches(':hover')||rack.contains(document.activeElement)}
+ function schedule(){clearTimeout(timer);if(!stopped())timer=setTimeout(advance,4000)}
+ function advance(){if(stopped()||moving)return;moving=true;index++;const step=set.getBoundingClientRect().width/set.children.length;track.style.transition='transform 800ms cubic-bezier(.25,.1,.25,1)';track.style.transform=`translateX(-${index*step}px)`;timer=setTimeout(()=>{if(index===set.children.length){index=0;track.style.transition='none';track.style.transform='translateX(0)'}moving=false;schedule()},800)}
+ pause.addEventListener('click',()=>{const paused=pause.getAttribute('aria-pressed')!=='true';pause.setAttribute('aria-pressed',paused);pause.textContent=paused?'Play gallery':'Pause gallery';if(!moving)schedule()});
+ rack.addEventListener('pointerenter',()=>{if(!moving)clearTimeout(timer)});rack.addEventListener('pointerleave',()=>{if(!moving)schedule()});rack.addEventListener('focusin',()=>{if(!moving)clearTimeout(timer)});rack.addEventListener('focusout',()=>setTimeout(()=>{if(!moving)schedule()},0));document.addEventListener('visibilitychange',()=>{if(!moving)schedule()});reduced.addEventListener('change',()=>{if(!moving)schedule()});window.addEventListener('resize',()=>{if(!moving){track.style.transition='none';track.style.transform=`translateX(-${index*set.getBoundingClientRect().width/set.children.length}px)`}});schedule();
+})();
