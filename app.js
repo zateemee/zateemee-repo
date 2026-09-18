@@ -87,8 +87,10 @@ const requestedTool=new URLSearchParams(location.search).get('tool');if(requeste
 })();
 (() => {
  const section=document.querySelector('.page-index .home-atelier');if(!section)return;
- const photo=section.querySelector(':scope > img'),reduced=matchMedia('(prefers-reduced-motion: reduce)');let frame=0;
- function update(){frame=0;if(reduced.matches){photo.style.transform='none';return}const rect=section.getBoundingClientRect();const progress=Math.max(0,Math.min(1,(innerHeight-rect.top)/(innerHeight*.72)));const eased=1-Math.pow(1-progress,3);photo.style.transform=`scale(${1.065-.065*eased})`}
- function queue(){if(!frame)frame=requestAnimationFrame(update)}
- addEventListener('scroll',queue,{passive:true});addEventListener('resize',queue);reduced.addEventListener('change',queue);update();
+ const photo=section.querySelector(':scope > img'),reduced=matchMedia('(prefers-reduced-motion: reduce)');
+ if(reduced.matches)return;
+ photo.classList.add('couture-zoom-waiting');
+ const observer=new IntersectionObserver(entries=>{if(entries.some(entry=>entry.isIntersecting)){photo.classList.remove('couture-zoom-waiting');photo.classList.add('couture-zoom-settle');observer.disconnect()}},{threshold:.2});
+ observer.observe(section);
+ reduced.addEventListener('change',()=>{if(reduced.matches){observer.disconnect();photo.classList.remove('couture-zoom-waiting','couture-zoom-settle')}});
 })();
