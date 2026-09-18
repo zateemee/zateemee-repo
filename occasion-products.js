@@ -1,5 +1,5 @@
 window.zateemeeOccasions=[
- {id:'champagne-dress',name:'Champagne embellished dress',image:'special-occasions-gallery/occasion-01-refined',photos:['occasion-01-refined','occasion-02']},
- {id:'red-evening-gown',name:'Red evening gown',image:'special-occasions-gallery/occasion-03-refined',photos:['occasion-03-refined','occasion-04-refined','occasion-05-refined','occasion-06-refined']},
- {id:'red-occasion-dress',name:'Red occasion dress',image:'special-occasions-gallery/occasion-06-refined',photos:['occasion-06-refined','occasion-05-refined']}
+ {id:'champagne-dress',name:'Sheba Short Lace Dress',price:1250,displayPrice:'$1,250',description:'An elegant luxury lace mini dress, beautifully crafted for sophisticated occasions and special events.',image:'special-occasions-gallery/occasion-01-refined',photos:['occasion-01-refined','occasion-02']},
+ {id:'red-evening-gown',name:'Jojo Red Mermaid Gown',price:2850,displayPrice:'$2,850',description:'A striking hand-beaded mermaid gown featuring an elegant sculpted silhouette and a dramatic sweeping train.',image:'special-occasions-gallery/occasion-03-refined',photos:['occasion-03-refined','occasion-04-refined','occasion-05-refined','occasion-06-refined']}
 ];
+try{const bag=JSON.parse(localStorage.getItem('zateemee-bag')||'[]');if(Array.isArray(bag)){const legacy={'Champagne embellished dress':'Sheba Short Lace Dress','Red evening gown':'Jojo Red Mermaid Gown','Red occasion dress':'Jojo Red Mermaid Gown'};const updated=[...new Set(bag.map(name=>legacy[name]||name))];localStorage.setItem('zateemee-bag',JSON.stringify(updated))}}catch{}
