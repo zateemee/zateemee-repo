@@ -117,3 +117,5 @@ body:not(.client-body){background-color:#fff;background-image:radial-gradient(el
 
 /* Keep catalog covers bounded independently of source photo dimensions. */
 .dress-folders{align-items:start}.folder-cover{height:340px;min-height:0;aspect-ratio:auto}.folder-cover img{display:block;width:100%;height:100%;max-height:100%;aspect-ratio:auto;object-fit:contain;object-position:center top}@media(max-width:900px){.folder-cover{height:300px}}@media(max-width:540px){.folder-cover{height:300px}}
+
+#hero-video::-webkit-media-controls,#hero-video::-webkit-media-controls-enclosure,#hero-video::-webkit-media-controls-overlay-enclosure{display:none!important}
