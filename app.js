@@ -89,7 +89,7 @@ const requestedTool=new URLSearchParams(location.search).get('tool');if(requeste
  const photo=section.querySelector(':scope > img'),reduced=matchMedia('(prefers-reduced-motion: reduce)');
  if(reduced.matches)return;
  photo.classList.add('couture-zoom-waiting');
- const observer=new IntersectionObserver(entries=>{if(entries.some(entry=>entry.isIntersecting)){photo.classList.remove('couture-zoom-waiting');photo.classList.add('couture-zoom-settle');observer.disconnect()}},{threshold:.2});
+ let playing=false;const observer=new IntersectionObserver(entries=>{for(const entry of entries){if(!entry.isIntersecting){playing=false;photo.classList.remove('couture-zoom-settle');photo.classList.add('couture-zoom-waiting')}else if(entry.intersectionRatio>=.2&&!playing&&!reduced.matches){playing=true;photo.classList.remove('couture-zoom-waiting');photo.classList.add('couture-zoom-settle')}}},{threshold:[0,.2]});
  observer.observe(section);
- reduced.addEventListener('change',()=>{if(reduced.matches){observer.disconnect();photo.classList.remove('couture-zoom-waiting','couture-zoom-settle')}});
+ reduced.addEventListener('change',()=>{playing=false;if(reduced.matches){observer.disconnect();photo.classList.remove('couture-zoom-waiting','couture-zoom-settle')}else{photo.classList.add('couture-zoom-waiting');observer.observe(section)}});
 })();
