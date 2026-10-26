@@ -16,7 +16,7 @@ Open http://127.0.0.1:4173.
 npm run build
 ```
 
-The Node server supports persistent API services. Cloudflare Pages can serve `dist/` with the enquiry Functions in `functions/`; see CLOUDFLARE-PUBLICATION.md for the mail settings and deployment requirements. Other database-backed services require their existing server or Worker adapters.
+Production is a Cloudflare static-assets Worker. Run the build and upload dist through its existing dashboard. Contact and wholesale forms use FormSubmit with the owner-confirmed recipient. The Node server and optional Pages Functions adapters remain available for future backend hosting. See CLOUDFLARE-PUBLICATION.md.
 
 ## Content and behaviour
 
@@ -24,7 +24,7 @@ The Node server supports persistent API services. Cloudflare Pages can serve `di
 - Material filters, accessible native detail dialogs, mobile navigation and an expanded editorial lookbook.
 - Optimised WebP versions of the supplied photographs and the short behind-the-scenes campaign video.
 - Bespoke special-event and retailer enquiries.
-- Contact and wholesale forms submit directly to the enquiry API. Email delivery requires configured mail credentials; see CLOUDFLARE-PUBLICATION.md. Public email and Instagram links are included in the footer.
+- Contact and wholesale forms send enquiries through FormSubmit to the confirmed atelier email; the inbox owner must complete the one-time activation. Public email and Instagram links are included in the footer.
 
 Draft pricing varies across the supplied documents, so no draft prices are published. The original wholesale costs, pricing strategy and private line sheets are intentionally excluded from public assets. Image-to-gown assignments are based on the silhouettes and captions supplied and should receive a final brand review. Simi is represented by the supplied captioned sample image.
 

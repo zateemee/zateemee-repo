@@ -1,26 +1,21 @@
-# Cloudflare publication
+# Cloudflare deployment and enquiry delivery
 
-The GitHub repository and the live Cloudflare website differed before these changes. The live site contains additional pages, layout improvements and backend integrations absent from this repository. Review and apply the correction commit to the current Cloudflare source rather than replacing that deployment with the older repository wholesale.
+The production website is the Cloudflare static-assets Worker `zateemee` in the account selected by the owner. Its custom domains include zateemee.com. The current public source was recovered and preserved before applying the corrections, including African Couture, Ambassador, Couture Experience, collection search, local fonts and optimized video assets absent from the earlier repository version.
 
-## Enquiry delivery
+## Publish
 
-For Cloudflare Pages, the new `functions/api/atelier/enquiries.js` route sends contact and wholesale submissions through Resend. Build command: `npm run build`; output: `dist`; Pages Functions directory: `functions` at repository root. Dashboard drag-and-drop of `dist` alone will not deploy Functions. Use the existing Git integration or Wrangler Pages deployment from the repository root. If the current project is a Worker rather than Pages, port the route into its existing Worker; do not replace the Worker.
+Run `npm run build`. Upload the contents of `dist` through the existing Worker's New deployment / folder upload control. This is a static site; the existing dashboard uploader cannot run the Node SQLite services or Pages Functions. Do not upload scripts, data, .git, credentials or local test files.
 
-Set the following Cloudflare production environment values:
+## Forms
 
-- `RESEND_API_KEY`: secret from the atelier's Resend account.
-- `REVIEW_NOTIFY_EMAIL`: confirmed atelier recipient. The publicly listed business email is info.zateemee@gmail.com.
-- `REVIEW_NOTIFY_FROM`: a verified sender in the Resend account.
-- `WHOLESALE_NOTIFY_EMAIL`: confirmed wholesale recipient; defaults to the atelier recipient.
+Contact and wholesale forms use FormSubmit's AJAX endpoint to deliver to the owner-confirmed info.zateemee@gmail.com. Subject lines include the selected interest, or `Wholesale enquiry — [boutique name]`. The first setup request was explicitly authorized by the owner and FormSubmit reported that an activation email was sent. The inbox owner must click Activate Form. A pending activation or service failure does not clear the visitor's fields or claim success. No further real test submissions were sent.
 
-The server never exposes these credentials in browser code. The Cloudflare route returns success only after the mail provider accepts the message. Missing configuration and delivery errors retain the visitor's form fields and show an email fallback. The existing Node backend persists enquiries and queues mail, and explicitly reports saved status rather than claiming inbox delivery.
+The same handler can use the existing Node /api/atelier/enquiries endpoint when the form's data-enquiry-provider attribute is omitted. The optional Pages Functions adapter under functions remains available for a future migration and requires the previously documented Resend secrets; it is not deployed by this static upload.
 
-Confirm WhatsApp number before adding its link. A directory lists a phone number but does not identify it as WhatsApp. Confirm the wholesale recipient, sample/trunk-show programme, minimum order, shipping regions/duties and promised response time. The page invites boutiques to discuss these terms without publishing placeholders or invented commitments.
+## Outstanding business details
 
-## Validation before publication
+WhatsApp is omitted until the owner confirms a WhatsApp number. The directory phone listing does not verify WhatsApp availability. Trunk-show/sample programme, minimum order, shipping/duties and a response-time promise remain subject to confirmation. The wholesale page invites enquiries about these terms rather than publishing placeholders or invented commitments.
 
-Run `npm run build`, `node scripts/integration-test.mjs`, and `node scripts/corrections-test.mjs`.
+## Validation
 
-Verify every interest option and the wholesale form against a staging inbox; confirm receipt and subject lines. Verify press articles and mobile pages. No real customer enquiry or external email was sent during local testing.
-
-No Cloudflare account credential or project access was available in this session, so the domain has not been redeployed.
+JavaScript syntax checks, build, integration tests and corrections tests; current-source checks of all 26 pages for unique descriptions and local links/assets; browser gown prefill and mobile overflow checks. Real inbox receipt remains to be confirmed after FormSubmit activation.

@@ -33,13 +33,19 @@ if (form) {
     try {
       const data = Object.fromEntries(new FormData(form));
       if (wholesale) data.interest = 'Wholesale';
-      const response = await fetch('/api/atelier/enquiries', {
+      const provider = form.dataset.enquiryProvider;
+      if (provider === 'formsubmit') {
+        data._subject = data.interest === 'Wholesale' ? 'Wholesale enquiry — ' + data.boutique : 'Zateemee enquiry — ' + data.interest;
+        data._template = 'table';
+      }
+      const endpoint = provider === 'formsubmit' ? 'https://formsubmit.co/ajax/info.zateemee@gmail.com' : '/api/atelier/enquiries';
+      const response = await fetch(endpoint, {
         method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(data)
       });
       let result;
       try { result = await response.json(); } catch { throw new Error('Online enquiries are temporarily unavailable. Please email info.zateemee@gmail.com.'); }
-      if (!response.ok) throw new Error(result.error || 'Your enquiry could not be sent. Please try again.');
-      status.textContent = result.message;
+      if (!response.ok || (provider === 'formsubmit' && String(result.success) !== 'true')) throw new Error(result.error || result.message || 'Your enquiry could not be sent. Please try again.');
+      status.textContent = provider === 'formsubmit' ? "Thank you. Your enquiry has reached the atelier, and we'll be in touch." : result.message;
       form.reset();
       const prepared = form.querySelector('#enquiry-result');
       if (prepared) prepared.hidden = true;

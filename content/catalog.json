@@ -154,5 +154,101 @@
     "srcset": "assets/responsive/red-evening-gown-320.webp 320w, assets/responsive/red-evening-gown-640.webp 640w, assets/responsive/red-evening-gown-960.webp 960w",
     "imageWidth": 1121,
     "imageHeight": 1403
+  },
+  {
+    "id": "african-couture-look-01",
+    "name": "African Couture — Look 01",
+    "description": "African couture portrait in white and gold",
+    "image": "assets/african-couture/IMG_6117-white.webp",
+    "photos": [
+      "assets/african-couture/IMG_6117-white.webp"
+    ],
+    "url": "african-couture.html#look-01",
+    "type": "editorial",
+    "collection": "African Couture"
+  },
+  {
+    "id": "african-couture-look-02",
+    "name": "African Couture — Look 02",
+    "description": "African couture look with sculptural white headwrap",
+    "image": "assets/african-couture/IMG_6118-white.webp",
+    "photos": [
+      "assets/african-couture/IMG_6118-white.webp"
+    ],
+    "url": "african-couture.html#look-02",
+    "type": "editorial",
+    "collection": "African Couture"
+  },
+  {
+    "id": "african-couture-look-03",
+    "name": "African Couture — Look 03",
+    "description": "White and gold couture portrait",
+    "image": "assets/african-couture/IMG_6119-white.webp",
+    "photos": [
+      "assets/african-couture/IMG_6119-white.webp"
+    ],
+    "url": "african-couture.html#look-03",
+    "type": "editorial",
+    "collection": "African Couture"
+  },
+  {
+    "id": "african-couture-look-04",
+    "name": "African Couture — Look 04",
+    "description": "Full-length cream and gold African couture look",
+    "image": "assets/african-couture/IMG_6120-white.webp",
+    "photos": [
+      "assets/african-couture/IMG_6120-white.webp"
+    ],
+    "url": "african-couture.html#look-04",
+    "type": "editorial",
+    "collection": "African Couture"
+  },
+  {
+    "id": "african-couture-look-05",
+    "name": "African Couture — Look 05",
+    "description": "Red African couture gown with seated companion",
+    "image": "assets/african-couture/IMG-20250701-WA0004-white.webp",
+    "photos": [
+      "assets/african-couture/IMG-20250701-WA0004-white.webp"
+    ],
+    "url": "african-couture.html#look-05",
+    "type": "editorial",
+    "collection": "African Couture"
+  },
+  {
+    "id": "african-couture-look-06",
+    "name": "African Couture — Look 06",
+    "description": "Red African couture gown with companion",
+    "image": "assets/african-couture/PHOTO-2026-09-19-13-44-02-white.webp",
+    "photos": [
+      "assets/african-couture/PHOTO-2026-09-19-13-44-02-white.webp"
+    ],
+    "url": "african-couture.html#look-06",
+    "type": "editorial",
+    "collection": "African Couture"
+  },
+  {
+    "id": "african-couture-look-07",
+    "name": "African Couture — Look 07",
+    "description": "Red African couture gown against dry tree silhouettes",
+    "image": "assets/african-couture/PHOTO-2026-09-19-13-44-02_1-trees.webp",
+    "photos": [
+      "assets/african-couture/PHOTO-2026-09-19-13-44-02_1-trees.webp"
+    ],
+    "url": "african-couture.html#look-07",
+    "type": "editorial",
+    "collection": "African Couture"
+  },
+  {
+    "id": "african-couture-look-08",
+    "name": "African Couture — Look 08",
+    "description": "African couture portrait with embroidered fan",
+    "image": "assets/african-couture/fan-leaf-edit.png",
+    "photos": [
+      "assets/african-couture/fan-leaf-edit.png"
+    ],
+    "url": "african-couture.html#look-08",
+    "type": "editorial",
+    "collection": "African Couture"
   }
 ]

@@ -1,7 +1,7 @@
 (() => {
  const products=window.zateemeeOccasions||[];
  function read(){try{const bag=JSON.parse(localStorage.getItem('zateemee-bag')||'[]');return Array.isArray(bag)?bag:[]}catch{return []}}
- function write(bag){localStorage.setItem('zateemee-bag',JSON.stringify(bag))}
+ function write(bag){localStorage.setItem('zateemee-bag',JSON.stringify(bag));window.dispatchEvent(new Event('zateemee:cart-change'))}
  const photos=document.querySelector('#occasion-product-photos');
  if(photos){
   const id=new URLSearchParams(location.search).get('dress');const product=products.find(p=>p.id===(id==='red-occasion-dress'?'red-evening-gown':id));
