@@ -32,20 +32,22 @@ if (form) {
     status.textContent = 'Sending your enquiry…';
     try {
       const data = Object.fromEntries(new FormData(form));
+      if (data._honey) return;
       if (wholesale) data.interest = 'Wholesale';
       const provider = form.dataset.enquiryProvider;
       if (provider === 'formsubmit') {
         data._subject = data.interest === 'Wholesale' ? 'Wholesale enquiry — ' + data.boutique : 'Zateemee enquiry — ' + data.interest;
         data._template = 'table';
       }
-      const endpoint = provider === 'formsubmit' ? 'https://formsubmit.co/ajax/info.zateemee@gmail.com' : '/api/atelier/enquiries';
+      const endpoint = provider === 'formsubmit' ? 'https://formsubmit.co/ajax/info@zateemee.com' : '/api/atelier/enquiries';
       const response = await fetch(endpoint, {
         method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(data)
       });
       let result;
-      try { result = await response.json(); } catch { throw new Error('Online enquiries are temporarily unavailable. Please email info.zateemee@gmail.com.'); }
+      try { result = await response.json(); } catch { throw new Error('Online enquiries are temporarily unavailable. Please email info@zateemee.com.'); }
       if (!response.ok || (provider === 'formsubmit' && String(result.success) !== 'true')) throw new Error(result.error || result.message || 'Your enquiry could not be sent. Please try again.');
-      status.textContent = provider === 'formsubmit' ? "Thank you. Your enquiry has reached the atelier, and we'll be in touch." : result.message;
+      status.textContent = provider === 'formsubmit' ? (wholesale ? 'Thank you. The line sheet request has reached our wholesale team, and we will reply by email.' : "Thank you. Your enquiry has reached the atelier, and we'll be in touch.") : result.message;
+      window.dispatchEvent(new CustomEvent('zateemee:enquiry-sent',{detail:{type:wholesale?'wholesale':String(data.interest||'contact')}}));
       form.reset();
       const prepared = form.querySelector('#enquiry-result');
       if (prepared) prepared.hidden = true;
