@@ -21,7 +21,7 @@ renderGowns();
 document.querySelectorAll('[data-filter]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('[data-filter]').forEach(x=>{x.classList.toggle('active',x===b);x.setAttribute('aria-pressed',String(x===b))});renderGowns(b.dataset.filter)}));
 function showGown(name){
  const g=gowns.find(x=>x.name===name);
- document.querySelector('#gown-detail').innerHTML=`<div class="detail-layout"><img src="assets/${g.image}.webp" alt="${g.name} bridal gown"><div class="detail-copy"><p class="eyebrow">THE FOREVER COLLECTION</p><h2 id="gown-title">${g.name}</h2><p>${g.description}</p><dl><div><dt>Sample colour</dt><dd>${g.colour}</dd></div><div><dt>Alternative colour</dt><dd>${g.alternative}</dd></div><div><dt>Production</dt><dd>12 weeks</dd></div><div><dt>Rush production</dt><dd>8 weeks*</dd></div></dl><p class="price-note">Price on enquiry. *Rush availability and fees confirmed by the atelier.</p><a class="button burgundy" href="contact.html" id="gown-enquire">Enquire about ${g.name} ↗</a></div></div>`;
+ document.querySelector('#gown-detail').innerHTML=`<div class="detail-layout"><img src="assets/${g.image}.webp" alt="${g.name} bridal gown"><div class="detail-copy"><p class="eyebrow">THE FOREVER COLLECTION</p><h2 id="gown-title">${g.name}</h2><p>${g.description}</p><dl><div><dt>Sample colour</dt><dd>${g.colour}</dd></div><div><dt>Alternative colour</dt><dd>${g.alternative}</dd></div><div><dt>Production</dt><dd>16 weeks</dd></div><div><dt>Rush production</dt><dd>12 weeks*</dd></div></dl><p class="price-note">Price on enquiry. *Rush availability and fees confirmed by the atelier.</p><a class="button burgundy" href="contact.html" id="gown-enquire">Enquire about ${g.name} ↗</a></div></div>`;
  const views=g.name==='Esther'?[['esther-front','Front'],['esther-rear','Back'],['esther','Full silhouette']]:g.name==='Janice'?[['janice','Front'],['janice-back','Back']]:[[g.image,'Front']];
  const mainPhoto=document.querySelector('#gown-detail .detail-layout>img');
  const photoPanel=document.createElement('div');photoPanel.className='detail-photos';mainPhoto.replaceWith(photoPanel);photoPanel.append(mainPhoto);
@@ -69,11 +69,11 @@ if(document.body.classList.contains('page-index')){
 }
 
 const enquiryType=new URLSearchParams(location.search).get('interest');
-const enquiryTypes={bespoke:'Bespoke Couture',couture:'Couture Experience',wholesale:'Wholesale',ambassador:'Zateemee Ambassador Program'};
+const enquiryTypes={bespoke:'Bespoke Couture',couture:'Couture Experience',wholesale:'Wholesale',ambassador:'Zateemee Ambassador Programme'};
 if(location.pathname.endsWith('contact.html')&&enquiryTypes[enquiryType]){
  const interest=enquiryTypes[enquiryType];document.querySelector('[name=interest]').value=interest;
  document.querySelector('#contact h2').innerHTML=enquiryType==='bespoke'?'Bespoke <em>Couture.</em>':enquiryType==='couture'?'Your <em>Couture Experience.</em>':enquiryType==='wholesale'?'Wholesale <em>enquiries.</em>':'Zateemee <em>Ambassador Program.</em>';
- document.querySelector('#contact>div>p:not(.eyebrow)').textContent=(enquiryType==='couture'||enquiryType==='bespoke')?'Tell the atelier about your vision, occasion and preferred silhouette.':enquiryType==='wholesale'?'Share your boutique details and your interest in stocking the Zateemee collection.':'Share your interest in the Zateemee Ambassador Program and tell us about yourself.';
+ document.querySelector('#contact>div>p:not(.eyebrow)').textContent=(enquiryType==='couture'||enquiryType==='bespoke')?'Tell the atelier about your vision, occasion and preferred silhouette.':enquiryType==='wholesale'?'Share your boutique details and your interest in stocking the Zateemee collection.':'Share your interest in the Zateemee Ambassador Programme and tell us about yourself.';
 }
 
 const cartCatalog=window.zateemeeOccasions||[];

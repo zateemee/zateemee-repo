@@ -48,16 +48,36 @@
  nav.querySelectorAll('.nav-dropdown').forEach(collections=>{const panel=collections.querySelector('.dropdown-panel');const line=document.createElement('span');line.className='collection-nav-line';panel.append(line);function position(link){line.style.top=link.offsetTop+link.offsetHeight-5+'px';line.style.width=Math.max(0,link.offsetWidth-40)+'px';line.style.opacity='1'};panel.querySelectorAll('a').forEach(link=>{link.addEventListener('pointerenter',()=>position(link));link.addEventListener('focus',()=>position(link))});panel.addEventListener('pointerleave',()=>line.style.opacity='0')});
 })();
 
-/* Give the mobile editorial an unmistakable scroll-driven sheet lift. */
+/* A quiet editorial overlap, following native scroll with a small eased drift. */
 (()=>{
  const feature=document.querySelector('.page-index .home-portrait-feature');
  const panel=document.querySelector('.page-index .home-editorial-selection');
- if(!feature||!panel)return;
- const mobile=matchMedia('(max-width: 760px)'),reduced=matchMedia('(prefers-reduced-motion: reduce)');
- let frame=0;
- function update(){frame=0;if(!mobile.matches){panel.style.removeProperty('--mobile-reveal-lift');return}const top=feature.getBoundingClientRect().top;const range=Math.min(300,innerHeight*.38);const progress=Math.max(0,Math.min(1,-top/range));panel.style.setProperty('--mobile-reveal-lift',reduced.matches?'0px':Math.round((1-progress)*150)+'px')}
- function schedule(){if(!frame)frame=requestAnimationFrame(update)}
- addEventListener('scroll',schedule,{passive:true});addEventListener('resize',schedule,{passive:true});mobile.addEventListener('change',schedule);reduced.addEventListener('change',schedule);update();
+ const portrait=feature?.querySelector('.home-portrait-layout');
+ if(!feature||!panel||!portrait)return;
+ const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+ let frame=0,lastTime=0,current=0,target=0,visible=true;
+ const clamp=value=>Math.max(0,Math.min(1,value));
+ function measure(){
+  const entering=innerHeight-(feature.getBoundingClientRect().top+portrait.offsetHeight);
+  const progress=clamp(entering/Math.max(1,innerHeight*.85));
+  const eased=progress*progress*(3-2*progress);
+  target=reduced.matches?0:(1-eased)*(innerWidth<=760?14:22);
+ }
+ function paint(){panel.style.setProperty('--editorial-drift',current.toFixed(3)+'px')}
+ function tick(time){
+  frame=0;
+  const delta=lastTime?Math.min(48,time-lastTime):16.67;lastTime=time;
+  current+=(target-current)*(1-Math.exp(-delta/105));
+  if(Math.abs(target-current)<.025)current=target;
+  paint();
+  if(current!==target&&visible&&!reduced.matches)frame=requestAnimationFrame(tick);else lastTime=0;
+ }
+ function update(){measure();if(!visible||reduced.matches){cancelAnimationFrame(frame);frame=0;lastTime=0;current=target;paint();return}if(!frame)frame=requestAnimationFrame(tick)}
+ measure();current=target;paint();
+ addEventListener('scroll',update,{passive:true});addEventListener('resize',update,{passive:true});
+ reduced.addEventListener('change',update);
+ document.addEventListener('visibilitychange',()=>{visible=!document.hidden;update()});
+ new IntersectionObserver(entries=>{visible=entries.some(entry=>entry.isIntersecting)&&!document.hidden;update()},{rootMargin:'160px'}).observe(feature);
 })();
 
 /* Mobile collection: one full-size gown at a time, advancing every two seconds. */
@@ -152,10 +172,10 @@ window.bridalDescriptions={"asa": "Off-the-shoulder draped satin gown featuring 
  const section=document.querySelector('#contact'),form=document.querySelector('#enquiry-form');if(!section||!form)return;
  const dialog=document.createElement('dialog');dialog.className='contact-enquiry-dialog';dialog.setAttribute('aria-labelledby','contact-enquiry-title');const close=document.createElement('button');close.type='button';close.className='contact-enquiry-close';close.setAttribute('aria-label','Close enquiry');close.textContent='×';const kicker=document.createElement('p');kicker.className='eyebrow';kicker.textContent='ZATEEMEE ATELIER';const title=document.createElement('h2');title.id='contact-enquiry-title';const introduction=document.createElement('p');introduction.className='contact-enquiry-intro';introduction.textContent='Tell us a little about yourself and what you have in mind.';dialog.append(close,kicker,title,introduction,form);document.body.append(dialog);
  const returnTo=new URLSearchParams(location.search).get('return')||sessionStorage.getItem('zt-enquiry-return');let trigger,closing=false;function dismiss(){if(closing||!dialog.open)return;closing=true;dialog.classList.add('contact-enquiry-leaving');setTimeout(()=>{dialog.close();dialog.classList.remove('contact-enquiry-leaving');closing=false;if(returnTo&&returnTo.startsWith('/')&&!returnTo.startsWith('//')){sessionStorage.removeItem('zt-enquiry-return');location.replace(returnTo)}},matchMedia('(prefers-reduced-motion: reduce)').matches?0:220)}close.onclick=dismiss;dialog.addEventListener('cancel',event=>{event.preventDefault();dismiss()});dialog.addEventListener('click',event=>{if(event.target===dialog){const rect=dialog.getBoundingClientRect();if(event.clientX<rect.left||event.clientX>rect.right||event.clientY<rect.top||event.clientY>rect.bottom)dismiss()}});dialog.addEventListener('close',()=>trigger?.focus());
- const intro=document.createElement('div');intro.className='contact-welcome';const eyebrow=document.createElement('p');eyebrow.className='eyebrow';eyebrow.textContent='CONTACT THE ATELIER';const heading=document.createElement('h1');heading.textContent='Let’s create your moment.';const copy=document.createElement('p');copy.textContent='Choose your enquiry to begin a conversation with Zateemee.';intro.append(eyebrow,heading,copy);const choices=document.createElement('div');choices.className='contact-options';
- const options=[['Bridal','Bespoke gowns and bridal appointments.','Bridal appointment'],['Special Occasions','A dress for your next special moment.','Special event'],['Wholesale','Retailer enquiries and partnerships.','Wholesale']];options.forEach(([label,description,value])=>{const button=document.createElement('button');button.type='button';const name=document.createElement('span');name.className='contact-option-name';name.textContent=label;const detail=document.createElement('span');detail.textContent=description;const action=document.createElement('span');action.className='contact-option-action';action.textContent='Start an enquiry';button.append(name,detail,action);button.onclick=()=>{trigger=button;form.querySelector('[name=interest]').value=value;title.textContent=label+' enquiry';dialog.showModal()};choices.append(button)});section.replaceChildren(intro,choices);const contact=document.querySelector('.atelier-contact');if(contact)section.append(contact.cloneNode(true));section.className='contact-hub';
+ const intro=document.createElement('div');intro.className='contact-welcome';const eyebrow=document.createElement('p');eyebrow.className='eyebrow';eyebrow.textContent='CONTACT THE ATELIER';const heading=document.createElement('h1');heading.textContent=document.body.classList.contains('page-press')?'Styling & press.':'Let’s create your moment.';const copy=document.createElement('p');copy.textContent='Choose your enquiry to begin a conversation with Zateemee.';intro.append(eyebrow,heading,copy);const choices=document.createElement('div');choices.className='contact-options';
+ const options=[['I’m a bride','Collection gowns and bridal appointments.','Bridal appointment'],['I want bespoke couture','A personalised couture journey.','Bespoke Couture'],['I’m a boutique','Wholesale collections and stockist partnerships.','Wholesale'],['Press / styling','Editorial, press and styling enquiries.','Press / styling']];options.forEach(([label,description,value])=>{const button=document.createElement('button');button.type='button';const name=document.createElement('span');name.className='contact-option-name';name.textContent=label;const detail=document.createElement('span');detail.textContent=description;const action=document.createElement('span');action.className='contact-option-action';action.textContent='Start an enquiry';button.append(name,detail,action);button.onclick=()=>{if(value==='Wholesale'){location.href='wholesale.html';return}trigger=button;form.querySelector('[name=interest]').value=value;title.textContent=label+' enquiry';dialog.showModal()};choices.append(button)});section.replaceChildren(intro,choices);const contact=document.querySelector('.atelier-contact');if(contact)section.append(contact.cloneNode(true));section.className='contact-hub';
  form.querySelector('label').firstChild.textContent='Full name';
- const params=new URLSearchParams(location.search),requested=params.get('interest'),requestedGown=params.get('gown');if(requested){const values={bridal:'Bridal appointment',bespoke:'Bespoke Couture',couture:'Couture Experience',wholesale:'Wholesale',special:'Special event',ambassador:'Zateemee Ambassador Program'};if(values[requested]){form.querySelector('[name=interest]').value=values[requested];title.textContent=requestedGown?`Enquire about ${requestedGown.charAt(0).toUpperCase()+requestedGown.slice(1)}`:values[requested]+' enquiry';dialog.showModal()}}
+ const params=new URLSearchParams(location.search),requested=params.get('interest'),requestedGown=params.get('gown');if(document.body.classList.contains('page-press')){form.querySelector('[name=interest]').value='Press / styling';title.textContent='Press / styling enquiry';dialog.showModal()}if(requested==='wholesale'){location.replace('wholesale.html');return}if(requested==='ambassador'){location.replace('ambassador.html');return}if(requested){const values={bridal:'Bridal appointment',bespoke:'Bespoke Couture',couture:'Couture Experience',wholesale:'Wholesale',special:'Special event',press:'Press / styling'};if(values[requested]){form.querySelector('[name=interest]').value=values[requested];title.textContent=requestedGown?`Enquire about ${requestedGown.charAt(0).toUpperCase()+requestedGown.slice(1)}`:values[requested]+' enquiry';dialog.showModal()}}
 })();
 
 /* Preserve the originating gown or collection when an enquiry opens on Contact. */
@@ -176,7 +196,7 @@ window.bridalDescriptions={"asa": "Off-the-shoulder draped satin gown featuring 
  const gown=gowns[page];
  if(gown){
   const heading=document.querySelector('.dress-heading'),purchase=heading?.querySelector('.dress-purchase');
-  if(heading&&purchase&&!heading.querySelector('.gown-specifications')){const specs=document.createElement('dl');specs.className='gown-specifications';[['Silhouette',gown.silhouette],['Fabric',gown.fabric],['Neckline',gown.neckline],['Signature detail',gown.detail],['Made to order','12 weeks · rush by confirmation'],['Personalisation','Fit and couture details discussed with the atelier']].forEach(([term,value])=>{const item=document.createElement('div'),dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=term;dd.textContent=value;item.append(dt,dd);specs.append(item)});purchase.before(specs)}
+  if(heading&&purchase&&!heading.querySelector('.gown-specifications')){const specs=document.createElement('dl');specs.className='gown-specifications';[['Silhouette',gown.silhouette],['Fabric',gown.fabric],['Neckline',gown.neckline],['Signature detail',gown.detail],['Made to order','16 weeks · 12-week rush for an additional fee'],['Personalisation','Fit and couture details discussed with the atelier']].forEach(([term,value])=>{const item=document.createElement('div'),dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=term;dd.textContent=value;item.append(dt,dd);specs.append(item)});purchase.before(specs)}
   let history=[];try{history=JSON.parse(localStorage.getItem('zt-recently-viewed')||'[]')}catch{}history=[page,...history.filter(item=>item!==page)].slice(0,4);try{localStorage.setItem('zt-recently-viewed',JSON.stringify(history))}catch{}
  }
  let history=[];try{history=JSON.parse(localStorage.getItem('zt-recently-viewed')||'[]')}catch{}const recent=history.filter(key=>gowns[key]&&key!==page).slice(0,3),main=document.querySelector('main');
