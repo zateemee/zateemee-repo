@@ -4,7 +4,7 @@ A responsive, photography-led website for The Forever Collection, designed aroun
 
 ## Run locally
 
-Requires Node.js 18 or newer. No package installation is needed.
+Requires Node.js 24 or newer (native SQLite). No package installation is needed.
 
 ```sh
 npm run dev
@@ -16,7 +16,7 @@ Open http://127.0.0.1:4173.
 npm run build
 ```
 
-Publish the generated `dist/` folder to a static host, or use the repository root as a static website. All asset paths are relative and support hosting under a subdirectory.
+The Node server supports persistent API services. Cloudflare Pages can serve `dist/` with the enquiry Functions in `functions/`; see CLOUDFLARE-PUBLICATION.md for the mail settings and deployment requirements. Other database-backed services require their existing server or Worker adapters.
 
 ## Content and behaviour
 
@@ -24,7 +24,7 @@ Publish the generated `dist/` folder to a static host, or use the repository roo
 - Material filters, accessible native detail dialogs, mobile navigation and an expanded editorial lookbook.
 - Optimised WebP versions of the supplied photographs and the short behind-the-scenes campaign video.
 - Bespoke special-event and retailer enquiries.
-- Contact details are not yet supplied. The form prepares a copyable enquiry and explicitly states it has not been sent. Set `CONTACT_EMAIL` in `app.js` to the confirmed atelier email to enable a mailto handoff; sending still happens in the visitor's email app.
+- Contact and wholesale forms submit directly to the enquiry API. Email delivery requires configured mail credentials; see CLOUDFLARE-PUBLICATION.md. Public email and Instagram links are included in the footer.
 
 Draft pricing varies across the supplied documents, so no draft prices are published. The original wholesale costs, pricing strategy and private line sheets are intentionally excluded from public assets. Image-to-gown assignments are based on the silhouettes and captions supplied and should receive a final brand review. Simi is represented by the supplied captioned sample image.
 
